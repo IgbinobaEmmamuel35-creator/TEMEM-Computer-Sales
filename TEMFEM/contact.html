@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <!-- HEADER -->
+<header>
+  <h1>TEMFEM Computer Store</h1>
+  <nav>
+    <a href="home.html">Home</a> | 
+    <a href="product.html">Products</a> | 
+    <a href="features.html">Features</a> | 
+    <a href="contact.html">Contact</a>
+  </nav>
+  <!-- CONTACT SECTION -->
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <div class="contact-info">
+      <h2>Contact Us</h2>
+      <p>Have questions about a build? Our tech experts are ready to help.</p>
+      <ul>
+        <li class="li">📍 123 Tech Lane, Silicon Valley</li>
+        <li class="li">📞 08052484296</li>
+        <li class="li">📧 igbinobaolufemi@gmail.com</li>
+      </ul>
+    </div>
+
+    <form id="contact-form" onsubmit="handleContact(event)">
+      <input type="text" id="contact-name" placeholder="Your Name" required>
+      <input type="email" id="contact-email" placeholder="Your Email" required>
+      <textarea id="contact-message" rows="5" placeholder="How can we help you?" required></textarea>
+      <button type="submit" class="cta-button">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 TEMFEM Computer Store. All rights reserved.</p>
+</footer>
+<script>
+    function handleContact(event) {
+  event.preventDefault(); // Prevents the page from refreshing
+
+  const name = document.getElementById('contact-name').value;
+  const email = document.getElementById('contact-email').value;
+  const message = document.getElementById('contact-message').value;
+
+  // In a real app, you'd send this data to a server (e.g., using fetch)
+  console.log("Message Received:", { name, email, message });
+
+  alert(`Thank you, ${name}! Your message has been sent. We'll get back to you at ${email} shortly.`);
+  
+  // Clear the form
+  document.getElementById('contact-form').reset();
+}
+</script>
+</body>
+</html>

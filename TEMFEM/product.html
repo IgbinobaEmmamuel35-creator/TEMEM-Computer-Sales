@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="product.css">
+</head>
+<body>
+    <!-- HEADER -->
+<header>
+  <h1>TEMFEM Computer Store</h1>
+  <nav>
+    <a href="About.html">Home</a> | 
+    <a href="product.html">Products</a> | 
+    <a href="features.html">Features</a> | 
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="cart" onclick="toggleCart()">🛒 Cart: <span id="cart-count">0</span></div>
+</header>
+    <!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="product" data-name="Laptop Pro 14" data-price="1200">
+    <img src="lap.jpg" alt="Laptop 1">
+    <h3>Laptop Pro 14"</h3>
+    <p>16GB RAM, 512GB SSD</p>
+    <p>$1200</p>
+    <button onclick="addToCart(this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Desktop Gamer X" data-price="2200">
+    <img src="desktop.jpg" alt="Desktop 1">
+    <h3>Desktop Gamer X</h3>
+    <p>32GB RAM, RTX 4070, 1TB SSD</p>
+    <p>$2200</p>
+    <button onclick="addToCart(this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ultra Laptop 13" data-price="900">
+    <img src="ultra-13.jpg" alt="Laptop 2">
+    <h3>Ultra Laptop 13"</h3>
+    <p>8GB RAM, 256GB SSD</p>
+    <p>$900</p>
+    <button onclick="addToCart(this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Gaming Monitor 27;" data-price="400">
+    <img src="gaming.jpg" alt="Monitor 1">
+    <h3>Gaming Monitor 27"</h3>
+    <p>144Hz, 1ms Response</p>
+    <p>$400</p>
+    <button onclick="addToCart(this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Mechanical Keyboard" data-price="150">
+    <img src="keyboard.jpg" alt="Keyboard">
+    <h3>Mechanical Keyboard</h3>
+    <p>RGB Backlit, Mechanical Switches</p>
+    <p>$150</p>
+    <button onclick="addToCart(this)">Add to Cart</button>
+  </div>
+    <!-- Gaming Laptop -->
+    <div class="product" data-name="Gaming Laptop 15" data-price="1800">
+      <img src="laptop-15.jpg" alt="Gaming Laptop 15">
+      <h3>Gaming Laptop 15"</h3>
+      <p>16GB RAM, RTX 3060, 1TB SSD</p>
+      <p>$1800</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Workstation Desktop -->
+    <div class="product" data-name="Workstation Desktop Z" data-price="2500">
+      <img src="desktop2.jpg" alt="Workstation Desktop Z">
+      <h3>Workstation Desktop Z</h3>
+      <p>64GB RAM, RTX 4080, 2TB SSD</p>
+      <p>$2500</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Mini PC -->
+    <div class="product" data-name="Mini PC Ultra" data-price="700">
+      <img src="minipc.jpg" alt="Mini PC Ultra">
+      <h3>Mini PC Ultra</h3>
+      <p>8GB RAM, 256GB SSD</p>
+      <p>$700</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <!-- Gaming Accessories -->
+    <div class="product" data-name="Gaming Headset X" data-price="120">
+      <img src="Gaming headset.webp" alt="Gaming Headset X">
+      <h3>Gaming Headset X</h3>
+      <p>Surround sound, Noise cancellation</p>
+      <p>$120</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Mechanical Keyboard K1" data-price="80">
+      <img src="Mechanical keyboard.webp" alt="Mechanical Keyboard K1">
+      <h3>Mechanical Keyboard K1</h3>
+      <p>RGB lighting, Cherry MX switches</p>
+      <p>$80</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+
+    <div class="product" data-name="Gaming Mouse M3" data-price="60">
+      <img src="Gaming M3.webp" alt="Gaming Mouse M3">
+      <h3>Gaming Mouse M3</h3>
+      <p>High DPI, Ergonomic design</p>
+      <p>$60</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <!-- External SSD -->
+    <div class="product" data-name="Portable SSD 1TB" data-price="150">
+      <img src="san disk.webp" alt="Portable SSD 1TB">
+      <h3>Portable SSD 1TB</h3>
+      <p>High-speed data transfer, compact design</p>
+      <p>$150</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+ <!-- Laptop 3 -->
+    <div class="product" data-name="Business Laptop 15" data-price="1100">
+      <img src="business lap.webp" alt="Business Laptop 15">
+      <h3>Business Laptop 15"</h3>
+      <p>16GB RAM, 512GB SSD, Lightweight</p>
+      <p>$1100</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+       <!-- Gaming Chair -->
+    <div class="product" data-name="Ergonomic Gaming Chair" data-price="250">
+      <img src="gaming chair.webp" alt="Ergonomic Gaming Chair">
+      <h3>Ergonomic Gaming Chair</h3>
+      <p>Comfortable for long gaming sessions</p>
+      <p>$250</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <script>
+  let count = 0;
+
+  function addToCart(button) {
+    // 1. Increment the count
+    count++;
+    
+    // 2. Update the number shown in the header
+    document.getElementById('cart-count').innerText = count;
+
+    // 3. Optional: Get product details from the data attributes
+    const productName = button.parentElement.getAttribute('data-name');
+    console.log("Added to cart: " + productName);
+  }
+
+  function toggleCart() {
+    alert("You have " + count + " items in your cart.");
+  }
+</script>
+</section>
+</body>
+</html>

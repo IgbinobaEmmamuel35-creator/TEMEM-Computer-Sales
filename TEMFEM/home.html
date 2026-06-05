@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title> 
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <!-- HEADER -->
+<header>
+  <h1>TEMFEM Computer Store</h1>
+  <nav>
+    <a href="home.html">Home</a> | 
+    <a href="product.html">Products</a> | 
+    <a href="features.html">Features</a> | 
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="account-buttons">
+    <button onclick="showLogin()">Login / Sign Up</button>
+  </div>
+  <div class="cart" onclick="toggleCart()">🛒 Cart: <span id="cart-count">0</span></div>
+  <div class="cart" onclick="toggleCart()">🛒 Cart: <span id="cart-count">0</span></div>
+</header>
+  <!-- HOME Section -->
+<section id="home" class="home-section">
+  <h2>Welcome of TEMFEM Computer Store</h2>
+  <p>Your one-stop shop for the latest laptops, desktops, and gaming rigs.</p>
+  <a href="product.html"><button class="cta-button" onclick="scrollToProducts()">Shop Now</button></a>
+</section>
+
+<!-- Feature Highlights -->
+<section class="features">
+  <div class="feature-card">
+    <h3>Free Shipping</h3>
+    <p>Get free shipping on all orders over $500.</p>
+  </div>
+  <div class="feature-card">
+    <h3>24/7 Support</h3>
+    <p>Our experts are always ready to help you with your tech needs.</p>
+  </div>
+  <div class="feature-card">
+    <h3>Best Deals</h3>
+    <p>Enjoy competitive prices on the latest hardware.</p>
+  </div>
+</section>
+ <!-- ACCOUNT MODAL -->
+<div id="account-modal">
+  <div id="account-content">
+    <span class="close-account" onclick="closeAccount()">×</span>
+
+    <!-- Login Form -->
+    <div id="login-form">
+      <h2>Login</h2>
+      <input type="email" id="login-email" placeholder="Email">
+      <input type="password" id="login-password" placeholder="Password">
+      <button onclick="loginUser()">Login</button>
+      <p>Don't have an account? <span onclick="showSignup()">Sign Up</span></p>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signup-form" style="display:none;">
+      <h2>Sign Up</h2>
+      <input type="text" id="signup-name" placeholder="Name">
+      <input type="email" id="signup-email" placeholder="Email">
+      <input type="password" id="signup-password" placeholder="Password">
+      <button onclick="signupUser()">Sign Up</button>
+      <p>Already have an account? <span onclick="showLogin()">Login</span></p>
+    </div>
+  </div>
+</div>
+<script>
+function scrollToProducts() {
+  document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
+}
+// Show modals
+function showLogin() {
+  document.getElementById('account-modal').style.display = 'flex';
+  document.getElementById('login-form').style.display = 'block';
+  document.getElementById('signup-form').style.display = 'none';
+}
+
+function showSignup() {
+  document.getElementById('account-modal').style.display = 'flex';
+  document.getElementById('signup-form').style.display = 'block';
+  document.getElementById('login-form').style.display = 'none';
+}
+
+function closeAccount() {
+  document.getElementById('account-modal').style.display = 'none';
+}
+
+// Sign Up
+function signupUser() {
+  const name = document.getElementById('signup-name').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+
+  if (!name || !email || !password) { alert("Please fill all fields."); return; }
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  if(users.find(u => u.email === email)) { alert("Email already registered."); return; }
+
+  users.push({name,email,password});
+  localStorage.setItem('users', JSON.stringify(users));
+  alert("Sign Up successful!");
+  showLogin();
+}
+
+// Login
+function loginUser() {
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(u => u.email === email && u.password === password);
+  if(user) {
+    alert("Login successful! Welcome, " + user.name);
+    closeAccount();
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    updateHeaderUser(user);
+  } else {
+    alert("Invalid email or password.");
+  }
+}
+
+// Update header after login
+function updateHeaderUser(user) {
+  const accountDiv = document.querySelector('.account-buttons');
+  accountDiv.innerHTML = `Welcome, ${user.name} <button onclick="logoutUser()">Logout</button>
+    <div class="cart" onclick="toggleCart()">🛒 Cart: <span id="cart-count">0</span></div>`;
+}
+
+// Logout
+function logoutUser() {
+  localStorage.removeItem('currentUser');
+  location.reload();
+}
+
+// Auto check login
+window.onload = function(){
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if(currentUser) updateHeaderUser(currentUser);
+}
+window.onload = function(){
+  // Check for User
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if(currentUser) updateHeaderUser(currentUser);
+
+  // Check for Cart Count
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  document.getElementById('cart-count').innerText = cart.length;
+}
+</script>
+</body>
+</html>
